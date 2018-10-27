@@ -1,6 +1,8 @@
 
 var playerCounter = 0;
-
+var crystalArray = ['assets/images/blue_crystal.png','assets/images/green_crystal.png', 'assets/images/red_crystal.png', 'assets/images/purple_crystal.png' ];
+var wins = 0;
+var lose = 0;
 $(document).ready(function() { 
 
     startGame()
@@ -9,8 +11,8 @@ function startGame(){
 
     randomNumber();
     createCrystal();
-    $("#gameWins").text(0);
-    $("#gameLose").text(0);
+    $("#gameWins").text(wins);
+    $("#gameLose").text(lose);
 };
    
 
@@ -27,9 +29,7 @@ function randomNumber() {
 };
 
 function createCrystal(){
-   
-     var crystalArray = ['assets/images/blue_crystal.png','assets/images/green_crystal.png', 'assets/images/red_crystal.png', 'assets/images/purple_crystal.png' ];
-    
+     
      for(i = 0; i < crystalArray.length; i++){
         var crystalImg = crystalArray[i]; 
             var imageCrystal = $("<img>");
@@ -39,6 +39,13 @@ function createCrystal(){
             $("#crystals-container").append(imageCrystal);     
      };
     };
+
+ function resetCrystalVal(){
+    for(i = 0; i < crystalArray.length; i++){
+        imageCrystal.attr("data-crystalvalue", crystalNumber());
+ };
+};   
+
 $(".crystal").on("click", function(){
 
     var crystalValue = ($(this).attr("data-crystalvalue"));
@@ -47,35 +54,24 @@ $(".crystal").on("click", function(){
     $('#userScore').text(playerCounter);
     var computerNum = $("#number-to-guess").text();
     if(playerCounter == computerNum){
-       $("#gameWins").text(calWins());
+       wins++;
        resetGame();
     }
      else if (playerCounter > computerNum) {
-        $("#gameLose").text(calLose());
+        lose++;
         resetGame();
     };
 });
-
-function calWins(){
-    
-    wins = 0
-    wins++; 
-    return wins;
-    
-};
-
-function calLose(){
-    
-    lose = 0 
-    lose++;
-    return lose;
-};
 
 function resetGame(){
 
     randomNumber();
     $("#userScore").text(0);
+    //resetCrystalVal();
     playerCounter = 0;
-}
+    $("#gameWins").text(wins);
+    $("#gameLose").text(lose);
+};
+
 
 });
