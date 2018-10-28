@@ -6,7 +6,7 @@ var lose = 0;
 $(document).ready(function() { 
 
     startGame()
-
+});
 function startGame(){
 
     randomNumber();
@@ -36,18 +36,13 @@ function createCrystal(){
             imageCrystal.addClass("crystal");
             imageCrystal.attr("src", crystalImg);
             imageCrystal.attr("data-crystalvalue", crystalNumber());
-            $("#crystals-container").append(imageCrystal);     
+            $("#crystals-container").append(imageCrystal);  
+              
      };
     };
 
- function resetCrystalVal(){
-    for(i = 0; i < crystalArray.length; i++){
-        imageCrystal.attr("data-crystalvalue", crystalNumber());
- };
-};   
 
-$(".crystal").on("click", function(){
-
+$("#crystals-container").on("click",".crystal", function(){ 
     var crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
     playerCounter += crystalValue;
@@ -67,11 +62,12 @@ function resetGame(){
 
     randomNumber();
     $("#userScore").text(0);
-    //resetCrystalVal();
     playerCounter = 0;
     $("#gameWins").text(wins);
     $("#gameLose").text(lose);
+    $(".crystal").remove();
+    createCrystal();
 };
 
 
-});
+

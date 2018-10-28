@@ -1,4 +1,25 @@
 .crystal {
     height: 160px;
     width: 220px;
-};
+}
+
+
+#gameWins{
+    color:green;
+}
+
+#gameLose{
+   color:red;
+}
+h1{
+    color:darkblue;
+    font-size: 80px;
+}
+
+#number-to-guess{
+    color:darkblue;
+}
+
+#userScore{
+    color:darkblue;
+}
